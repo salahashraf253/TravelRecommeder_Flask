@@ -10,7 +10,7 @@ def intersection(lst1, lst2, total_num):
         return 5
     elif (len(lst3) == 0):
         return 0
-
+#[1,2,4,6]
 def user_profile_restaurant(cuisine_input, user_id):
     allRestaurants = pd.read_csv(r'C:\Users\Salah Ashraf\PycharmProjects\TravelRecommeder_Flask\Restaurants\Cairo_Final_Clean_Updated.csv' ,encoding='latin-1')
 

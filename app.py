@@ -15,7 +15,11 @@ def hello_world():
 @app.route("/hotel/user-profile/<userId>",methods=['POST'])
 def add_user_for_hotel(userId):
     assert userId == request.view_args['userId']
-    data = request.json
+    print(request)
+    data = request.get_json(force=True)
+
+    print(data)
+
     amentaties_list = data.get('amenities', [])
     # lst=[1,5,6,9,8,7,4]
 
@@ -63,9 +67,28 @@ def restaurant_recommednation(userId,city):
     assert userId == request.view_args['userId']
     assert city == request.view_args['city']
     df = recommend_restaraurnat(userId, city)
-    print("Rssssssssssssssssssssss")
     print(df)
     return df
+
+
+@app.route("/attraction/user-profile/<userId>",methods=['POST'])
+def add_user_for_attraction(userId):
+    assert userId == request.view_args['userId']
+    data = request.json
+    cuisines_list = data.get('cuisines', [])
+    # lst=[1,5,6,9,8,7,4]
+
+    user_profile_restaurant(cuisines_list,userId)
+    print("Done----------")
+    return ("Done ")
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(port=5000)

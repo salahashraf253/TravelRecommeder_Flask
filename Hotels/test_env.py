@@ -61,7 +61,7 @@ def recommend_restaraurnat(user_id, city):
 
 def recommend_attraction_place(user_id, city):
     attractions_data = pd.read_csv('attractions_reccommendation/attractions.csv')
-    ratings_data = pd.read_csv('attractions_reccommendation/user_profiling3010.csv')  # all ratings 5
+    ratings_data = pd.read_csv('attractions_reccommendation/user_profiling3011.csv')  # all ratings 5
 
     df = rbm(attractions_data, ratings_data, city, user_id)
     # print(type(df))
