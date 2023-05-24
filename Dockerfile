@@ -45,4 +45,4 @@ COPY . .
 EXPOSE 5000
 
 # Set the entrypoint command
-ENTRYPOINT ["python", "your_flask_app.py"]
+ENTRYPOINT ["python", "app.py"]
