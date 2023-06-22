@@ -85,14 +85,9 @@ def add_user_for_attraction(userId):
 
 
 
-
-
-
-
-
 if __name__ == '__main__':
     # app.run(port=5000)
-    app.config["SPARK_MASTER_URL"] = "local[*]"
+    # app.config["SPARK_MASTER_URL"] = "local[*]"
     app.run(debug=True,host='0.0.0.0')
 
 
