@@ -254,10 +254,13 @@ def plan(city, starting_point, days, start_time, end_time):
 i = 0
 def plan_multiple_days(days,city,location,no,start_time,end_time):
     i = 0
+    my_plan = {}
     while i < days:
         itiner2 = plan(city,location,no, start_time,end_time)
-        print(itiner2)
+        my_plan[i]=itiner2
+        # print(itiner2)
         i= i +1
+    return my_plan
 
 # planmultipledays(4,"cairo", (30.0444, 31.2357), 1, "8AM", "8PM", visited_res, visited__attr)
 

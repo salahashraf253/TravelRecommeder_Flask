@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from Hotels import test_env
 from Hotels.test_env import *
 # from Restaurants.restaruant_call import recommend_restaraurnat
@@ -127,7 +127,7 @@ def plan_recommednation(userId,city):
     no_days=data.get('noOfDays',int)
     # print(plan_multiple_days(no_days, city,(lat,long),userId, start_time, end_time))
     print("=============================================================")
-    return plan_multiple_days(no_days, city,(lat,long),userId, start_time, end_time).json()
+    return jsonify(plan_multiple_days(no_days, city,(lat,long),userId, start_time, end_time))
 
 
 if __name__ == '__main__':
