@@ -55,7 +55,7 @@ def user_profile(amenities_input, user_id):
 
     print(pd.DataFrame(user_rating_df))
     # pd.DataFrame(user_rating_df).to_csv('user_profiling.csv', index = False)
-    pd.DataFrame(user_rating_df).to_csv('Hotels/user_profile_Data/user_profiling307.csv', index=False, mode='a', header=False)
+    pd.DataFrame(user_rating_df).to_csv('Hotels/user_profiling307.csv', index=False, mode='a', header=False)
 
 
 # user_profile()

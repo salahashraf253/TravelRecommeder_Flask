@@ -9,8 +9,8 @@ def intersection(category, lst1):
        return False
 
 
-def user_profile(user_id):
-    attractions = pd.read_csv('G:\\Fourth Year\\GP\\RecommendationModel\\attractions_reccommendation\\attractions.csv', encoding ='latin1')
+def user_profile(user_id): 
+    attractions = pd.read_csv('attractions.csv', encoding ='latin1')
 
     categories = {1: 'Museum', 2: 'Park', 3: 'Historical landmark', 4:'Beach', 5:'Garden',6:'Art Gallery',
                  7:'Palace',8:'Mosque', 9:'Church', 10:'Shopping mall'}
