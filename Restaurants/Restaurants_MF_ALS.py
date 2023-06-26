@@ -86,11 +86,18 @@ def recommendationsRest (model,userID,rest,city):
         .withColumn("rec_exp", explode('recommendations')) \
         .select('userID', col("rec_exp.restID"), col("rec_exp.rating"))
 
-    nrecommendations.join(rest, on='restID').select('userID','restID','name','ratings','longitude','latitude','city')\
-        .filter(col('userID') == userID).filter(col('city')==city).orderBy(col('ratings').desc()).show()
+    # nrecommendations.join(rest, on='restID').select('userID','restID','name','ratings','longitude','latitude','city')\
+    #     .filter(col('userID') == userID).filter(col('city')==city).orderBy(col('ratings').desc()).show()
+    
+    recsforArr=nrecommendations.join(rest, on='restID').select('userID', 'restID', 'name', 'ratings', 'longitude', 'latitude','city')
+    recsforArr= recsforArr.filter(col('userID') == userID).filter(col('city')==city).orderBy(col('ratings').desc())
+    user_recs_array = recsforArr.collect()
+
+    restID_array = [row.restID for row in user_recs_array]
+    return restID_array
 
 def recommendationsRestPlan(model, userID, rest, city, times):
-    userRecs = model.recommendForAllUsers(20)
+    userRecs = model.recommendForAllUsers(500)
     nrecommendations = userRecs \
         .withColumn("rec_exp", explode('recommendations')) \
         .select('userID', col("rec_exp.restID"), col("rec_exp.rating"))

@@ -134,7 +134,8 @@ def plan(city, starting_point, days, start_time, end_time):
     dinner_flag = False
 
     itinerary = []
-
+    # visited_res = []
+    # visited__attr = []
 
     restaurants = [r for r in data["restaurants"] if r["city"] == str.capitalize(city)]
     attractions = [a for a in data["attractions"] if a["city"] == city]
@@ -256,6 +257,8 @@ def plan_multiple_days(days,city,location,no,start_time,end_time):
     i = 0
     my_plan = {}
     while i < days:
+        print("day number: ")
+        print(i)
         itiner2 = plan(city,location,no, start_time,end_time)
         my_plan[i]=itiner2
         # print(itiner2)

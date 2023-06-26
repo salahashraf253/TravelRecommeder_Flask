@@ -73,8 +73,12 @@ def restaurant_recommednation(userId,city):
     assert userId == request.view_args['userId']
     assert city == request.view_args['city']
     df = recommend_restaraurnat(userId, city)
+    print("Data restaurant: ---------------------------------------------------------------------")
     print(df)
-    return df
+    try:
+        return df.tolist()
+    except:
+        return df
 
 
 
@@ -115,7 +119,7 @@ def restaurant_recommednation_cosine(restaurant_id):
 
 from Plan.planMultipleDays import plan_multiple_days
 
-@app.route('/recommend/plan/<userId>/<city>', methods=['GET'])
+@app.route('/recommend/plan/<userId>/<city>', methods=['POST'])
 def plan_recommednation(userId,city):
     assert userId == request.view_args['userId']
     assert city == request.view_args['city']

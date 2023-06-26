@@ -137,7 +137,7 @@ def rbm(attractions_data, ratings_data, city, userid):
                                               'Recommendation Score', 'rating'])
 
 
-    ret=attractions_15_df.loc[(merged_data_15['city'] == city)].head(20)
+    ret=attractions_15_df.loc[(merged_data_15['city'] == city)].head(100)
     print("Return of RBM function ")
     print(ret)
     print("End of printing")
