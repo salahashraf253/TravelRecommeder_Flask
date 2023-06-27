@@ -8,10 +8,10 @@ from datetime import datetime
 from Restaurants.Restaurants_MF_ALS import *
 
 def getRecommendationForPlanRest (userID, City):
-    csvRestInfo = r"C:\Users\Salah Ashraf\PycharmProjects\TravelRecommeder_Flask\Plan\Allrestaurants2.csv"
-    timesCsv = r"C:\Users\Salah Ashraf\PycharmProjects\TravelRecommeder_Flask\Plan\Allrestaurants3.csv"
+    csvRestInfo = r"D:\repos\TravelRecommeder_Flask\Plan\Allrestaurants2.csv"
+    timesCsv = r"D:\repos\TravelRecommeder_Flask\Plan\Allrestaurants3.csv"
     timesSpark = spark.read.csv(timesCsv, header=True)
-    csvRatingInfoRest = r'C:\Users\Salah Ashraf\PycharmProjects\TravelRecommeder_Flask\Restaurants\user_profiling_rest.csv'
+    csvRatingInfoRest = r'D:\repos\TravelRecommeder_Flask\Restaurants\user_profiling_rest.csv'
     # when entering a new user we do have to retrain the entire model
     ratingsSparkRest, rest = initial_files_Rest(csvRestInfo, csvRatingInfoRest)
     calculateSparsityRest(ratingsSparkRest)
@@ -50,8 +50,8 @@ def changeTimeFormat(df):
 
 def formatRecommendations (city,id):
     restaurants_df = getRecommendationForPlanRest(id, city)
-    attractions_data = pd.read_csv(r'C:\Users\Salah Ashraf\PycharmProjects\TravelRecommeder_Flask\attractions_reccommendation\attractions.csv')
-    ratings_data = pd.read_csv(r'C:\Users\Salah Ashraf\PycharmProjects\TravelRecommeder_Flask\attractions_reccommendation\user_profiling3010.csv')
+    attractions_data = pd.read_csv(r'D:\repos\TravelRecommeder_Flask\attractions_reccommendation\attractions.csv')
+    ratings_data = pd.read_csv(r'D:\repos\\TravelRecommeder_Flask\attractions_reccommendation\user_profiling3010.csv')
     attractions_df = rbm.rbm(attractions_data, ratings_data, str.lower(city), id)
     restaurants_df_pandas = restaurants_df.toPandas()
     changeTimeFormat(restaurants_df_pandas)
@@ -71,7 +71,7 @@ def formatRecommendations (city,id):
         }
         data['restaurants'].append(restaurant)
 
-    timesAttract = pd.read_csv(r'C:\Users\Salah Ashraf\PycharmProjects\TravelRecommeder_Flask\attractions_reccommendation\Attractions open hours.csv')
+    timesAttract = pd.read_csv(r'D:\repos\TravelRecommeder_Flask\attractions_reccommendation\Attractions open hours.csv')
 
     # select = timesAttract.loc[:, ['attraction_id', 'open_time', 'close_time']]
 

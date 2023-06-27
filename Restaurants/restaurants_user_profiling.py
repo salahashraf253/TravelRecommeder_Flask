@@ -12,7 +12,7 @@ def intersection(lst1, lst2, total_num):
         return 0
 #[1,2,4,6]
 def user_profile_restaurant(cuisine_input, user_id):
-    allRestaurants = pd.read_csv(r'C:\Users\Salah Ashraf\PycharmProjects\TravelRecommeder_Flask\Restaurants\Cairo_FInal_Clean_Updated.csv' ,encoding='latin-1')
+    allRestaurants = pd.read_csv(r'D:\repos\TravelRecommeder_Flask\Restaurants\Cairo_FInal_Clean_Updated.csv' ,encoding='latin-1')
 
     cuisine_types = {1: 'Mediterranean', 2: 'Egyptian', 3: 'Italian', 4:'Seafood', 5:'Middle Eastern',6:'European',
                  7:'American',8:'Vegetarian Friendly', 9:'Lebanese', 10:'Barbecue', 11:'Japanese',12:'Healthy',13:'Steakhouse',
@@ -58,6 +58,6 @@ def user_profile_restaurant(cuisine_input, user_id):
            )
 
     print(pd.DataFrame(user_rating_df))
-    pd.DataFrame(user_rating_df).to_csv('user_profiling_rest.csv', index = False)
+    pd.DataFrame(user_rating_df).to_csv('user_profiling_rest.csv', index = False, mode='a')
 
 # user_profile()

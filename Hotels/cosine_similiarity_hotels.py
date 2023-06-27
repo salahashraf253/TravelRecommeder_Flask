@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-all_hotels = pd.read_csv(r"C:\Users\Salah Ashraf\PycharmProjects\TravelRecommeder_Flask\Hotels\AllhotelswithImg.csv", encoding='latin1')
+all_hotels = pd.read_csv(r"D:\repos\TravelRecommeder_Flask\Hotels\AllhotelswithImg.csv", encoding='latin1')
 
 
 
