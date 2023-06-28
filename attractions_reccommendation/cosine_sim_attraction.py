@@ -9,46 +9,44 @@ df = pd.read_csv(r"C:\Users\Salah Ashraf\PycharmProjects\TravelRecommeder_Flask\
 #print(df.head())
 
 
+# create a CountVectorizer object to transform the "keywords" column into a matrix of word counts
 cv = CountVectorizer(stop_words='english')
 count_matrix = cv.fit_transform(df["keywords"])
-#print("Count Matrix:", count_matrix.toarray())
-#print(cv.get_stop_words(count_matrix))
-#print(cv.get_feature_names_out(count_matrix))
-# compute the cosine similarity matrix
+
+# compute the cosine similarity matrix between all pairs of attractions based on their keywords
 similarity = cosine_similarity(count_matrix)
-#print(similarity)
 
-
-
-# create a function that takes in attraction name as input and returns a list of the most similar attractions
+# create a function that takes in attraction ID and number of recommendations as inputs and returns a list of the most similar attractions in the same city
 def get_recommendations(attraction_id, n=20, cosine_sim=similarity):
-    # get the index of the attraction that matches the attraction name
-    attraction_index = attraction_id
-    # print(attraction_index, attractionName)
+    # get the city of the attraction
+    city = df[df['attraction_id'] == attraction_id]['city'].values[0]
 
-    # get the pairwsie similarity scores of all movies with that movie and sort the movies based on the similarity scores
+    # select only the attractions that match the same city
+    df_city = df[df['city'] == city]
+
+    # get the index of the attraction that matches the attraction ID
+    attraction_index = df_city.index[df_city['attraction_id'] == attraction_id].tolist()[0]
+
+    # get the pairwise similarity scores of all attractions in the same city and sort the attractions based on the similarity scores
     sim_scores_all = sorted(list(enumerate(cosine_sim[attraction_index])), key=lambda x: x[1], reverse=True)
 
-    # checks if recommendations are limited
+    # filter the attractions by city
+    sim_scores_city = [(i, score) for i, score in sim_scores_all if df.iloc[i]['city'] == city]
+
+    # check if recommendations are limited
     if n > 0:
-        sim_scores_all = sim_scores_all[1:n + 1]
+        sim_scores_city = sim_scores_city[1:n + 1]
 
     # get the attraction indices of the top similar attractions
-    attraction_indices = [i[0] for i in sim_scores_all]
-    # for i in attraction_indices:
-    #     print(i)
-    scores = [i[1] for i in sim_scores_all]
+    attraction_indices = [i[0] for i in sim_scores_city]
+    scores = [i[1] for i in sim_scores_city]
 
-    # return the top n most similar attractions from the attractions df
-    top_attractions_df = pd.DataFrame(df.iloc[attraction_indices]['attraction_name'])
-    top_attractions_df['sim_scores'] = scores
-    top_attractions_df['ranking'] = range(1, len(top_attractions_df) + 1)
-
-    return attraction_indices
-    # return top_attractions_df, sim_scores_all
-
-
+    # create a DataFrame of the top similar attractions and their similarity scores
+    top_attractions_df = pd.DataFrame(df.iloc[attraction_indices][['attraction_id', 'attraction_name', 'city']])
+    return top_attractions_df['attraction_id'].tolist()
 # generate a list of recommendations for a specific attraction name
+# attraction_name = 'The Hanging Church'
+# top_attractions_df = get_recommendations(attraction_name, 20)
 # attraction_name = 'The Hanging Church'
 # top_attractions_df = get_recommendations(attraction_name, 20)
 
