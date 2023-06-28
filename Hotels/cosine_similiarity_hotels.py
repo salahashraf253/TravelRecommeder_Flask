@@ -15,7 +15,8 @@ def get_recommendation(hotel_id,number=20):
 
     cosine_sim = cosine_similarity(count_matrix)
     hotel_index = hotel_id
-
+    name = get_hotelName_from_index(hotel_index)
+    city = get_city_from_hotelName(hotel_index)
     similar_hotels = list(enumerate(cosine_sim[hotel_index]))
 
     sorted_similar_hotels = sorted(similar_hotels, key=lambda x: x[1], reverse=True)
@@ -24,15 +25,14 @@ def get_recommendation(hotel_id,number=20):
     i = 0
     for hotel in sorted_similar_hotels:
         name_of_hotel = get_hotelName_from_index(hotel[0])
-        if( name_of_hotel == hotel_name):
+        city_of_hotel = get_city_from_hotelName(hotel[0])
+        if( name_of_hotel == hotel_name or city_of_hotel != city):
             continue
-
         hotel_ids.append(hotel[0])
 
         i = i + 1
         if (i == number):
             break
-
     # for id in hotel_ids:
     #     print(id)
     return hotel_ids
@@ -50,6 +50,5 @@ def get_hotelName_from_index(index):
 def print_hotel_details(name):
     return all_hotels[all_hotels.name == name]["name"].values[0],all_hotels[all_hotels.name == name]["ratings"].values[0],all_hotels[all_hotels.name == name]["Price Range"].values[0]
 
-# get_recommendation("Fort Arabesque Resort, Spa & Villas",20)
 
 
